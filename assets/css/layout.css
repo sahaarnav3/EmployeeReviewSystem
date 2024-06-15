@@ -63,6 +63,13 @@
     width: 100%;
     text-align: center;
 }
+.already-present a {
+    font-style: italic;
+    /* text-decoration: none;
+    border-bottom: 2px dotted white; */
+    text-decoration: underline dotted white; 
+    text-underline-offset: 4px; 
+}
 
 /* ----------------  Below css for login page -------------- */
 .login-employee {
