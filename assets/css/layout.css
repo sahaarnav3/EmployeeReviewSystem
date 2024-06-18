@@ -83,3 +83,40 @@
     font-size: 40px;
     margin-bottom: 20px;
 }
+
+
+/* ----------------  Below css for admin page -------------- */
+.adminpage-nav {
+    background-color: rgba(24, 0, 0, 0.658);
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-greeting {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.nav-greeting img {
+    filter: invert(1);
+    margin-right: 10px;
+}
+.nav-greeting h1 {
+    font-size: 30px;
+    font-weight: 500;
+}
+.nav-greeting h6 {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.logout-btn {
+    background-color: rgba(167, 167, 167, 0.597);
+    font-size: 22px;
+    padding: 5px 20px;
+    font-weight: 500;
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}

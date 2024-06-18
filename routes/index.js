@@ -12,6 +12,9 @@ console.log('Router Loaded');
 
 //Homepage controllers (the main page that appears after login) -- 
 router.get('/homepage', homePageController.homepage);
+router.get('/admin-page', homePageController.adminPageRender);
+router.get('/employee-page', homePageController.employeePageRender);
+router.post('/log-out', homePageController.destroySession);
 
 //Below router will be used for the functionality of creating and logging in an employee.
 router.get('/create-employee', landingPageController.landing);
