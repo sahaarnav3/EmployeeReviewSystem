@@ -7,6 +7,22 @@
     color: white;
 }
 
+::-webkit-scrollbar {
+    /* display: none; */
+    width: 4px;
+    background-color: rgba(245, 222, 179, 0.274);
+}
+
+::-webkit-scrollbar-thumb {
+    /* display: none; */
+    background-color: white;
+    border-radius: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
 /* -------  LANDING PAGE CSS  --------- */
 .create-employee {
     /* width: 30%; */
@@ -168,4 +184,169 @@
 }
 .submit-create:hover {
     transform: scale(1.03);
+}
+
+.employee-list-and-edit {
+    width: 100vw;
+    height: 81vh;
+    /* background-color: rgba(70, 70, 70, 0.655); */
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.employee-list {
+    width: 58%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+    border-left: 3px solid white;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    border-radius: 10px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 20px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.edit-plus-ratings {
+    width: 41%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    border-bottom: 3px solid white;
+    border-radius: 10px;
+    padding: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.employee-details {
+    background-color: rgba(71, 71, 71, 0.597);
+    width: 31%;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.employee-details img {
+    filter: invert(1);
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.employee-details input {
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.558);
+    font-size: 18px;
+    padding: 5px;
+    width: 90%;
+    border-radius: 15px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+.employee-details button {
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.558);
+    font-size: 18px;
+    padding: 5px;
+    width: 90%;
+    border-radius: 15px;
+    color: red;
+    border: 2px solid red;
+}
+.employee-details input:hover {
+    transform: scale(1.04);
+}
+.Admin {
+    color: rgb(255, 51, 0);
+    text-transform: uppercase;
+}
+.employee {
+    color: white;
+}
+
+.edit-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.edit-details-inside {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.edit-details h2 {
+    text-align: center;
+}
+.edit-details-inside select {
+    background-color: rgba(75, 75, 75, 0.597);
+    outline: none;
+    font-size: 16px;
+    padding: 7px 10px;
+    border-radius: 10px;
+}
+.edit-details-inside option {
+    background-color: black;
+    outline: none;
+}
+
+.edit-details input {
+    background-color: rgba(167, 167, 167, 0.597);
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+.edit-details input:hover {
+    transform: scale(1.02);
+}
+.edit-details-inside input {
+    font-size: 16px;
+    background-color: rgba(75, 75, 75, 0.597);
+    outline: none;
+    padding: 7px 10px;
+    width: 50%;
+}
+.review-section {
+    margin-top: 40px;
+}
+.review-section h2 {
+    text-align: center;
+}
+
+.assign-review {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.assign-review select {
+    background-color: rgba(75, 75, 75, 0.597);
+    font-size: 18px;
+    padding: 10px 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+}
+.assign-review option {
+    background-color: black;
+}
+.assign-review input {
+    background-color: rgba(167, 167, 167, 0.597);
+    padding: 5px 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    width: 100%;
+}
+.assign-review input:hover {
+    transform: scale(1.02);
 }

@@ -25,15 +25,15 @@ passport.use(new localStrategy({
 
 //Below Functions are basially used to convert the employee object received into a kind of data which can be easily stored in our 
 //session storage. This data is unique identifier for the employee.
-passport.serializeUser((employee, done) => {
+passport.serializeUser((user, done) => {
     // console.log(`Serialize Employee Data -- user= ${user}`);
-    done(null, employee.id);
+    done(null, user.id);
 });
 
 passport.deserializeUser(async(id, done) => {
     try {
-        const employeeData = await Employee.findById(id);
-        return done(null, employeeData);
+        const userData = await Employee.findById(id);
+        return done(null, userData);
     } catch(err) {
         return (null, false, {message: "Error In Finding The Employee --> Passport"});
     }

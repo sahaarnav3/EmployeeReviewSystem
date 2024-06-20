@@ -16,6 +16,7 @@ router.get('/admin-page', homePageController.adminPageRender);
 router.get('/employee-page', homePageController.employeePageRender);
 router.post('/log-out', homePageController.destroySession);
 router.post('/create-employee-from-admin', homePageController.createEmployeeFromAdmin);
+router.get('/fetch-employees', homePageController.fetchEmployess);
 
 //Below router will be used for the functionality of creating and logging in an employee.
 router.get('/create-employee', landingPageController.landing);

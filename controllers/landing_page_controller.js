@@ -20,7 +20,7 @@ module.exports.createEmployee = async (req, res) => {
         return res.json({ "Error": "Please enter correct password in both the fields. Try Again" });
     let newEmployee = "";
     try {
-        const role = req.body['secret-code'] == 'ninja' ? 'admin' : 'employee';
+        const role = req.body['secret-code'] == 'ninja' ? 'Admin' : 'Employee';
         newEmployee = await Employee.create(new Employee({
             name: req.body.name,
             email: req.body.email,

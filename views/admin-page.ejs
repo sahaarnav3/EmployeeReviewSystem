@@ -18,15 +18,59 @@
     </div>
     <div class="adminpage-create">
         <img src="https://cdn.hugeicons.com/icons/forgot-password-solid-rounded.svg" alt="forgot-password" width="30" height="30">
-        <input  type="password" name="password" placeholder="Enter Password">
+        <input  type="password" name="password" placeholder="Enter Password" required>
     </div>
     <div class="adminpage-create">
         <img src="https://cdn.hugeicons.com/icons/mentoring-solid-rounded.svg" alt="mentoring" width="30" height="30">
-        <select name="role">
+        <select name="role" required>
             <option selected disabled>Choose Role of Employee</option>
-            <option value="admin">Admin</option>
-            <option value="employee">Employee</option>
+            <option value="Admin">Admin</option>
+            <option value="Employee">Employee</option>
         </select>
     </div>
     <input class="submit-create" type="submit" value="Create Employee">
 </form>
+
+<div class="employee-list-and-edit">
+    <div class="employee-list">
+        <!-- <div class="employee-details">
+            <img src="https://cdn.hugeicons.com/icons/user-multiple-solid-rounded.svg" alt="user-multiple" width="50" height="50">
+            <h3>Arnav Saha</h3>
+            <h3>1@a</h3>
+            <h3>Admin</h3>
+        </div> -->
+        <% for(employee of allEmployessData) { %>
+            <div class="employee-details" id="<%= employee['_id'] %>">
+                <img src="https://cdn.hugeicons.com/icons/user-multiple-solid-rounded.svg" alt="user-multiple" width="50" height="50">
+                <h3><%= employee.name %></h3>
+                <h3><%= employee.email %></h3>
+                <h3 class="<%= employee.role %>"><%= employee.role %></h3>
+                <% if(employee.role == 'Admin') { %>
+                    <button disabled>Disabled For Admin</button>
+                <% } else { %>
+                    <input type="button" value="Click to Edit !" id="<%= employee['_id'] %>" class="employee-btn">
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+    <div class="edit-plus-ratings">
+        <div class="edit-employee">
+            
+        </div>
+        <div class="review-section">
+            <h2>Review Section</h2>
+            <div class="assign-review">
+                <select name="assign-review-from" required>
+                    <option selected disabled>Choose the Employee You Want To Assign Review To:</option>
+                    <option value="idnumber">Some Name 1</option>
+                    <option value="idnumber">Some Name 2</option>
+                    <option value="idnumber">Some Name 3</option>
+                    <option value="idnumber">Some Name 4</option>
+                </select>
+                <input type="button" value="Send Request">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascript/script.js"></script>
