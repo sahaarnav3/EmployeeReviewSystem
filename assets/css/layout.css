@@ -264,6 +264,7 @@
 .employee-details input:hover {
     transform: scale(1.04);
 }
+
 .Admin {
     color: rgb(255, 51, 0);
     text-transform: uppercase;
@@ -318,15 +319,16 @@
 .review-section {
     margin-top: 40px;
 }
-.review-section h2 {
+.review-section h2, h3 {
     text-align: center;
 }
 
 .assign-review {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* justify-content: center; */
     gap: 10px;
+    margin-top: 10px;
 }
 .assign-review select {
     background-color: rgba(75, 75, 75, 0.597);
@@ -340,7 +342,7 @@
 .assign-review option {
     background-color: black;
 }
-.assign-review input {
+.assign-review  input {
     background-color: rgba(167, 167, 167, 0.597);
     padding: 5px 10px;
     font-size: 18px;

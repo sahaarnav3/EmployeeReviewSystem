@@ -47,8 +47,13 @@
                 <h3 class="<%= employee.role %>"><%= employee.role %></h3>
                 <% if(employee.role == 'Admin') { %>
                     <button disabled>Disabled For Admin</button>
+                    <button disabled>Delete</button>
                 <% } else { %>
-                    <input type="button" value="Click to Edit !" id="<%= employee['_id'] %>" class="employee-btn">
+                    <form action="delete-employee" method="Post">
+                        <input type="button" value="Click to Edit !" id="<%= employee['_id'] %>" class="employee-btn">
+                        <input type="hidden" name="employee-id" value="<%= employee['_id'] %>">
+                        <input type="submit" value="Delete" >
+                    </form>
                 <% } %>
             </div>
         <% } %>
@@ -57,18 +62,18 @@
         <div class="edit-employee">
             
         </div>
-        <div class="review-section">
+        <div class="review-section hidden">
             <h2>Review Section</h2>
-            <div class="assign-review">
-                <select name="assign-review-from" required>
-                    <option selected disabled>Choose the Employee You Want To Assign Review To:</option>
-                    <option value="idnumber">Some Name 1</option>
-                    <option value="idnumber">Some Name 2</option>
-                    <option value="idnumber">Some Name 3</option>
-                    <option value="idnumber">Some Name 4</option>
-                </select>
-                <input type="button" value="Send Request">
-            </div>
+            <h3 style="color: orange;">For Arnav Saha</h3>
+            <form action="/add-review" method="POST">
+                <div class="assign-review">
+                    <select name="assign-review-from" required>
+                    </select>
+                    <div class="assign-review-btns">
+                        
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

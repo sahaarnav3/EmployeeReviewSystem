@@ -31,14 +31,30 @@ const showEditMenu = (id) => {
         `
 }
 
-const assignReviewSection = (id, name) => {
-    const selectedEmployee = id;
-    // document.querySelector('.assign-review').innerHTML = 
+const assignReviewSection = (id) => {
+    let assignReview = document.querySelector('.assign-review select');
+    document.querySelector('.review-section').classList.remove('hidden');
+    assignReview.innerHTML = `<option selected disabled>Choose the Employee You Want To Assign Review To:</option>`;
+    allEmployees.forEach(emp => {
+        if(emp['_id'] != id){
+            assignReview.innerHTML += `<option value="${emp['_id']}">${emp.name} :- ${emp.email}</option>`;
+        }
+    })
+    document.querySelector('.assign-review-btns').innerHTML = 
+    `
+        <input type="submit" value="Send Request" class="send-request">
+        <input type="hidden" name="assign-review-to" value="${id}">
+    `
 }
 
 document.querySelectorAll('.employee-btn').forEach((btn) => {
     btn.addEventListener('click', (btn) => {
         console.log(btn.target.id);
         showEditMenu(btn.target.id);
+        assignReviewSection(btn.target.id);
     })
+});
+
+document.querySelector('.send-request').addEventListener('click', () => {
+    console.log('dab dab');
 })

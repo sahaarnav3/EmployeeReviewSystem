@@ -16,7 +16,7 @@ module.exports.fetchEmployess = async (req, res) => {
     let allEmployees = await Employee.find({});
     let onlyEmployees = [];
     allEmployees.forEach(emp => {
-        if(emp.role === 'Employee')
+        if (emp.role === 'Employee')
             onlyEmployees.push(emp);
     });
     // console.log("only Employees -- ",onlyEmployees);
@@ -71,4 +71,45 @@ module.exports.destroySession = (req, res) => {
         }
         res.redirect('/login-employee');
     })
+}
+
+module.exports.deleteEmployee = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    try {
+        await Employee.deleteOne({ _id: req.body['employee-id'] });
+    } catch (err) {
+        console.log("Error While deleting Habit: ", err);
+    }
+    return res.redirect('/homepage');
+}
+
+module.exports.editEmployee = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    try {
+        if (req.body.role && req.body['edit-needed']) {
+            const roleValue = req.body.role;
+            const editValue = req.body['edit-needed'];
+            await Employee.findByIdAndUpdate(
+                req.body['employee-id'],
+                { $set: { [roleValue]: editValue } }
+            );
+            
+        } else {
+            res.redirect('/homepage');
+        }
+    } catch (err) {
+        if(err.code == 11000){
+            console.log("Email Already Exists, try another email.");
+            return res.redirect('/homepage');
+        }
+        console.log("Error Updating Employee Data --", err);
+    }
+    res.redirect('/homepage');
+    // res.json(req.body);
+}
+
+module.exports.addReview = (req, res) => {
+    res.json(req.body);
 }
