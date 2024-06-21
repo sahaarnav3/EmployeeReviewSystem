@@ -69,12 +69,23 @@ const fetchAllRatings = async (id) => {
 
 const renderRatings = async (id) => {
     const fetchedRatings = await fetchAllRatings(id);
-    const keys = Object.keys(fetchedRatings).forEach(key => {
+    if(Object.keys(fetchedRatings).length == 0){
         document.querySelector('.past-ratings').innerHTML = 
         `
             <div class="employee-review">
-                    <p>${fetchedRatings[key]}</p>
-                    <span> 🗨️ ${key} </span>
+                <p>NO REVIEWS YET</p>
+                <span> 🗨️ </span>
+            </div>
+        `;
+        return;
+    }
+    document.querySelector('.past-ratings').innerHTML = "";
+    const keys = Object.keys(fetchedRatings).forEach(key => {
+        document.querySelector('.past-ratings').innerHTML += 
+        `
+            <div class="employee-review">
+                <p>${fetchedRatings[key]}</p>
+                <span> 🗨️ ${key} </span>
             </div>
         `
     })
@@ -82,7 +93,6 @@ const renderRatings = async (id) => {
 
 document.querySelectorAll('.employee-btn').forEach((btn) => {
     btn.addEventListener('click', async (btn) => {
-        console.log(btn.target.id);
         showEditMenu(btn.target.id);
         assignReviewSection(btn.target.id);
         await renderRatings(btn.target.id);
