@@ -61,7 +61,11 @@ module.exports.createEmployeeFromAdmin = async (req, res) => {
 module.exports.employeePageRender = (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
-    res.send("hello bc");
+    res.render('employee-page.ejs', {
+        backgroundImage: '../images/background2.png', 
+        username: req.user.name.toUpperCase(),
+        userId: req.user['_id']
+    });
 }
 
 module.exports.destroySession = (req, res) => {
@@ -127,7 +131,6 @@ module.exports.addReview = async (req, res) => {
         console.log("This error occured in creating the review by admin :- ", err);
     }
     return res.redirect('/homepage');
-    // res.json(req.body);
 }
 
 module.exports.fetchRatings = async (req, res) => {

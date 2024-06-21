@@ -33,7 +33,7 @@ const showEditMenu = (id) => {
 
 const assignReviewSection = (id) => {
     let assignReview = document.querySelector('.assign-review select');
-    assignReview.innerHTML = `<option selected disabled>Choose the Employee You Want To Assign Review To:</option>`;
+    assignReview.innerHTML = `<option selected disabled>Choose the Employee You Want To Assign Review From:</option>`;
     allEmployees.forEach(emp => {
         if(emp['_id'] != id){
             assignReview.innerHTML += `<option value="${emp['_id']}">${emp.name} :- ${emp.email}</option>`;

@@ -189,7 +189,7 @@
 .employee-list-and-edit {
     width: 100vw;
     height: 81vh;
-    /* background-color: rgba(70, 70, 70, 0.655); */
+    background-color: rgba(70, 70, 70, 0.655);
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -363,4 +363,76 @@
     padding: 10px;
     border-radius: 10px;
     background-color: rgba(77, 77, 77, 0.675);
+}
+
+/* ----------------  Below css for employee page -------------- */
+
+.review-list-and-pending {
+    width: 100vw;
+    height: 92vh;
+    /* margin-top: 30px; */
+    /* background-color: rgba(70, 70, 70, 0.655); */
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pending-reviews, .employee-reviews {
+    width: 50%;
+    /* background-color: rgba(105, 105, 105, 0.411); */
+    height: 100%;
+    padding: 10px;
+}
+.pending-reviews {
+    border-right: 2px dotted white;
+}
+.pending-reviews-content, .employee-reviews-content {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(42, 42, 42, 0.578);
+    border-radius: 15px;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 10px 20px;
+}
+
+.pending-review {
+    border: 2px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(68, 68, 68, 0.485);
+    margin-bottom: 20px;
+}
+.pending-review h2 {
+    color: orange;
+}
+.review-text-input {
+    width: 95%;
+    font-size: 20px;
+    padding: 5px 10px;
+    background-color: black;
+    font-weight: 500;
+    border: 2px solid rgb(184, 184, 184);
+    outline: none;
+    border-radius: 10px;
+}
+.review-text-input::placeholder {
+    color: rgb(184, 184, 184);
+}
+.review-text-btn {
+    background-color: rgba(106, 106, 106, 0.97);
+    font-size: 20px;
+    padding: 10px 20px;
+    border: 2px solid white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.review-text-btn:hover {
+    transform: scale(1.02);
 }

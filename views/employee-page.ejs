@@ -1,0 +1,38 @@
+<form action="/log-out" method="POST" class="adminpage-nav">
+    <div class="nav-greeting">
+        <img src="https://cdn.hugeicons.com/icons/user-full-view-solid-rounded.svg" alt="employee" width="30" height="30">
+        <h1> <%= username %> </h1>
+        <h6>(employee)</h6>
+    </div>
+    <input class="logout-btn" type="submit" value="Log Out 👋">
+</form>
+
+<div class="review-list-and-pending">
+    <div class="pending-reviews">
+        <div class="pending-reviews-content">
+            <h1 style="text-align: center; margin-top: 5px; margin-bottom: 30px;">Pending Reviews</h1>
+            <div class="pending-review-list">
+                <form action="/modify-rating" method="POST" class="pending-review">
+                    <h2>For Some Name</h2>
+                    <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
+                    <input type="hidden" name="employee-to" value="empid">
+                    <input type="submit" value="Submit Rating" class="review-text-btn">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="employee-reviews">
+        <div class="employee-reviews-content">
+            <h1 style="text-align: center; margin-top: 5px; margin-bottom: 30px;">All Reviews</h1>
+            <div class="past-ratings" id="<%= userId %>">
+                <div class="employee-review">
+                    <p>NO REVIEWS YET</p>
+                    <span> 🗨️ </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/javascript/employee-page-script.js"></script>
