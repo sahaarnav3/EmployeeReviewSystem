@@ -352,3 +352,15 @@
 .assign-review input:hover {
     transform: scale(1.02);
 }
+
+.past-ratings {
+    display: flex;
+    flex-direction: column;
+}
+.employee-review {
+    border: 2px dotted rgb(255, 255, 255);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(77, 77, 77, 0.675);
+}

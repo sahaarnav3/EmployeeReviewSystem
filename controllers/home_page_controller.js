@@ -1,4 +1,5 @@
 const Employee = require('../models/employees');
+const Rating = require('../models/ratings');
 
 module.exports.homepage = (req, res) => {
     if (!req.isAuthenticated())
@@ -110,6 +111,54 @@ module.exports.editEmployee = async (req, res) => {
     // res.json(req.body);
 }
 
-module.exports.addReview = (req, res) => {
-    res.json(req.body);
+module.exports.addReview = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    let newRating = "";
+    try {
+        newRating = await Rating.create(new Rating({
+            from: req.body['assign-review-from'],
+            to: req.body['assign-review-to'],
+            status: 'pending',
+            content: ''
+        }));
+        // console.log(newRating);
+    } catch (err) {
+        console.log("This error occured in creating the review by admin :- ", err);
+    }
+    return res.redirect('/homepage');
+    // res.json(req.body);
+}
+
+module.exports.fetchRatings = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    let finalRating = {};
+    try {
+        let nameData = [];
+        let fetchedRatings = await Rating.find({ to: req.body.employeeId, status: 'complete' });
+        // console.log("backend fetched ratings = ", fetchedRatings);
+        if(fetchedRatings){
+            const promises = fetchedRatings.map(async (rating) => {
+                const employee = await Employee.findById(rating.from, {name : 1, _id : 0});
+                return employee.name;
+            });
+            await Promise.all(promises)
+            .then((fetchNames) => {
+                nameData.push(...fetchNames);
+            })
+            .catch((err) => {
+                console.error("Error fetching names:", error);
+            });
+            // console.log("finalRating data ----- ",nameData);
+            let i = 0;
+            fetchedRatings.forEach(rating => {
+                finalRating[nameData[i++]] = rating.content;
+            });
+        }
+        
+    } catch(err) {
+        console.log("Error while fetching ratings from the mongoDB (backend side)--", err);
+    }
+    return res.json(finalRating);
 }

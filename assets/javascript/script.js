@@ -4,7 +4,7 @@ const fetchEmployees = (async () => {
     .then(response => response.json())
     .then(data => {
         allEmployees = data;
-        console.log("all employess in client: ", allEmployees);
+        // console.log("all employess in client: ", allEmployees);
     })
     .catch(err => { return {'message': `Error Occured while fetching only employees list from mongo (This is client side) (err = ${err})` } });
 })();
@@ -33,13 +33,15 @@ const showEditMenu = (id) => {
 
 const assignReviewSection = (id) => {
     let assignReview = document.querySelector('.assign-review select');
-    document.querySelector('.review-section').classList.remove('hidden');
     assignReview.innerHTML = `<option selected disabled>Choose the Employee You Want To Assign Review To:</option>`;
     allEmployees.forEach(emp => {
         if(emp['_id'] != id){
             assignReview.innerHTML += `<option value="${emp['_id']}">${emp.name} :- ${emp.email}</option>`;
+        } else {
+            document.querySelector('.employee-name').innerHTML = emp.name;
         }
     })
+    document.querySelector('.review-section').classList.remove('hidden');
     document.querySelector('.assign-review-btns').innerHTML = 
     `
         <input type="submit" value="Send Request" class="send-request">
@@ -47,14 +49,42 @@ const assignReviewSection = (id) => {
     `
 }
 
+const fetchAllRatings = async (id) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            employeeId: id
+        })
+    };
+    try {
+        let fetchedData = await fetch('/fetch-ratings', options);
+        return fetchedData.json(); 
+    } catch (err) {
+        return {'message': `Error Occured while fetching reviews from mongoDB (This is client side) (err = ${err} )`};
+    }
+}
+
+const renderRatings = async (id) => {
+    const fetchedRatings = await fetchAllRatings(id);
+    const keys = Object.keys(fetchedRatings).forEach(key => {
+        document.querySelector('.past-ratings').innerHTML = 
+        `
+            <div class="employee-review">
+                    <p>${fetchedRatings[key]}</p>
+                    <span> 🗨️ ${key} </span>
+            </div>
+        `
+    })
+}
+
 document.querySelectorAll('.employee-btn').forEach((btn) => {
-    btn.addEventListener('click', (btn) => {
+    btn.addEventListener('click', async (btn) => {
         console.log(btn.target.id);
         showEditMenu(btn.target.id);
         assignReviewSection(btn.target.id);
+        await renderRatings(btn.target.id);
     })
 });
-
-document.querySelector('.send-request').addEventListener('click', () => {
-    console.log('dab dab');
-})

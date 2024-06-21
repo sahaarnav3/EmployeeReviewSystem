@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Employees = require('./employees');
 
-const ratingSchema = mongoose.model({
+const ratingSchema = mongoose.Schema({
     from: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employees',
@@ -21,8 +21,8 @@ const ratingSchema = mongoose.model({
         type: String
     }
 }, {
-    timestamps: true 
-})
+    timestamp: true
+});
 
-const Ratings = mongoose.Model('Ratings', ratingSchema);
+const Ratings = mongoose.model('Ratings', ratingSchema);
 module.exports = Ratings;

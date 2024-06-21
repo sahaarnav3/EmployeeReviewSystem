@@ -20,6 +20,7 @@ router.get('/fetch-employees', homePageController.fetchEmployess);
 router.post('/delete-employee', homePageController.deleteEmployee);
 router.post('/edit-employee', homePageController.editEmployee);
 router.post('/add-review', homePageController.addReview);
+router.post('/fetch-ratings', homePageController.fetchRatings);
 
 //Below router will be used for the functionality of creating and logging in an employee.
 router.get('/create-employee', landingPageController.landing);
