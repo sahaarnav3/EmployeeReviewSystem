@@ -15,7 +15,19 @@
                 <form action="/modify-rating" method="POST" class="pending-review">
                     <h2>For Some Name</h2>
                     <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
-                    <input type="hidden" name="employee-to" value="empid">
+                    <input type="hidden" name="employee-to" value="ratingid">
+                    <input type="submit" value="Submit Rating" class="review-text-btn">
+                </form>
+                <form action="/modify-rating" method="POST" class="pending-review">
+                    <h2>For Some Name</h2>
+                    <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
+                    <input type="hidden" name="employee-to" value="ratingid">
+                    <input type="submit" value="Submit Rating" class="review-text-btn">
+                </form>
+                <form action="/modify-rating" method="POST" class="pending-review">
+                    <h2>For Some Name</h2>
+                    <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
+                    <input type="hidden" name="employee-to" value="ratingid">
                     <input type="submit" value="Submit Rating" class="review-text-btn">
                 </form>
             </div>
@@ -23,7 +35,7 @@
     </div>
     <div class="employee-reviews">
         <div class="employee-reviews-content">
-            <h1 style="text-align: center; margin-top: 5px; margin-bottom: 30px;">All Reviews</h1>
+            <h1 style="text-align: center; margin-top: 5px; margin-bottom: 30px;">Received Reviews</h1>
             <div class="past-ratings" id="<%= userId %>">
                 <div class="employee-review">
                     <p>NO REVIEWS YET</p>

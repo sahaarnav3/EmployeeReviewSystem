@@ -23,7 +23,7 @@ module.exports.createEmployee = async (req, res) => {
         const role = req.body['secret-code'] == 'ninja' ? 'Admin' : 'Employee';
         newEmployee = await Employee.create(new Employee({
             name: req.body.name,
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             password: req.body.password,
             role: role
         }));

@@ -15,6 +15,23 @@ const fetchAllRatings = async (id) => {
         return {'message': `Error Occured while fetching reviews from mongoDB (This is client side) (err = ${err} )`};
     }
 }
+const fetchPendingRatings = async (id) => {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            employeeId: id
+        })
+    };
+    try {
+        let fetchedData = await fetch('/fetch-pending-ratings', options);
+        return fetchedData.json(); 
+    } catch (err) {
+        return {'message': `Error Occured while fetching reviews from mongoDB (This is client side) (err = ${err} )`};
+    }
+}
 
 const renderRatings = (async() =>{
     const id = document.querySelector('.past-ratings').id;
@@ -37,6 +54,24 @@ const renderRatings = (async() =>{
                 <p>${fetchedRatings[key]}</p>
                 <span> 🗨️ ${key} </span>
             </div>
+        `
+    })
+})();
+
+const renderPendingRatings = (async() => {
+    const id = document.querySelector('.past-ratings').id;
+    const fetchedRatings = await fetchPendingRatings(id);
+    console.log(fetchedRatings);
+    document.querySelector('.pending-review-list').innerHTML = "";
+    Object.keys(fetchedRatings).forEach(name => {
+        document.querySelector('.pending-review-list').innerHTML += 
+        `
+            <form action="/modify-rating" method="POST" class="pending-review">
+                <h2>${name}</h2>
+                <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
+                <input type="hidden" name="rating-id" value="${fetchedRatings[name]}">
+                <input type="submit" value="Submit Rating" class="review-text-btn">
+            </form>
         `
     })
 })();

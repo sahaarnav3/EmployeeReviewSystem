@@ -393,7 +393,7 @@
     height: 100%;
     background-color: rgba(42, 42, 42, 0.578);
     border-radius: 15px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
     padding: 10px 20px;
 }

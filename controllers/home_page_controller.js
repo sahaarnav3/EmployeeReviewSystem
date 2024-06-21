@@ -7,7 +7,7 @@ module.exports.homepage = (req, res) => {
     // res.send(req.user.role);
     if (req.user.role === 'Admin')
         return res.redirect('/admin-page');
-    return res.redirect('employee-page');
+    return res.redirect('/employee-page');
     //do one thing just check if employee is admin or not and redirect him accordingly. Don't use this function to render one page.
 }
 
@@ -45,7 +45,7 @@ module.exports.createEmployeeFromAdmin = async (req, res) => {
     try {
         newEmployee = await Employee.create(new Employee({
             name: req.body.name,
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             password: req.body.password,
             role: req.body.role
         }));
@@ -83,6 +83,7 @@ module.exports.deleteEmployee = async (req, res) => {
         return res.redirect('/login-employee');
     try {
         await Employee.deleteOne({ _id: req.body['employee-id'] });
+        await Rating.deleteMany({ to: req.body['employee-id'] });
     } catch (err) {
         console.log("Error While deleting Habit: ", err);
     }
@@ -164,4 +165,62 @@ module.exports.fetchRatings = async (req, res) => {
         console.log("Error while fetching ratings from the mongoDB (backend side)--", err);
     }
     return res.json(finalRating);
+}
+
+module.exports.fetchPendingRatings = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    let finalRating = {};
+    try {
+        let nameData = [];
+        let fetchedRatings = await Rating.find({ from: req.body.employeeId, status: 'pending' });
+        if(fetchedRatings){
+            const promises = fetchedRatings.map(async (rating) => {
+                const employee = await Employee.findById(rating.to, {name : 1, _id : 0});
+                return employee.name;
+            });
+            await Promise.all(promises)
+            .then((fetchNames) => {
+                nameData.push(...fetchNames);
+            })
+            .catch((err) => {
+                console.error("Error fetching names:", error);
+            });
+            // console.log("finalRating data ----- ",nameData);
+            let i = 0;
+            fetchedRatings.forEach(rating => {
+                finalRating[nameData[i++]] = rating.id;
+            });
+        }
+        
+    } catch(err) {
+        console.log("Error while fetching ratings from the mongoDB (backend side)--", err);
+    }
+    return res.json(finalRating);
+}
+
+module.exports.modifyRating = async (req, res) => {
+    if (!req.isAuthenticated())
+        return res.redirect('/login-employee');
+    let ratingContent = req.body['rating-content'].trim();
+    let ratingId = req.body['rating-id'];
+    try {
+        if(ratingContent){
+            const update = {
+                $set: {
+                    status: "complete",
+                    content: ratingContent
+                }
+            };
+            const updatedRating = await Rating.findByIdAndUpdate(ratingId, update);
+            // if (updatedRating) 
+            //     return res.status(200).send({ message: 'Rating updated successfully' });
+            // else 
+            //     return res.status(404).send({ message: 'Rating not found' });
+        }
+    } catch(err) {
+        console.error(error);
+        return res.status(500).send({ message: 'Internal server error' });
+    }
+    return res.redirect('/homepage');
 }
