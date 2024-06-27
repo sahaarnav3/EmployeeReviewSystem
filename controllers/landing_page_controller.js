@@ -1,18 +1,22 @@
 
 const Employee = require('../models/employees');
 
+// Below controller will be used to render the create user page. This page is the first view appears when anyone opens the application.
 module.exports.landing = (req, res) => {
     if(req.isAuthenticated())
         res.redirect('/homepage');
     res.render('landing.ejs', { backgroundImage: '../images/background4.jpg' });
 }
 
+// Below controller will be used to render the login page.
 module.exports.loginEmployeePage = (req, res) => {
     if(req.isAuthenticated())
         res.redirect('/homepage');
     res.render('login-user.ejs', { backgroundImage: '../images/background4.jpg' });
 }
 
+// Below controller is what will actually handle the request of creating a new user. And based on the keyword assing the role of Admin 
+// or employee. (If secret given == 'ninja' then role assigned will be Admin).
 module.exports.createEmployee = async (req, res) => {
     if(req.isAuthenticated())
         res.redirect('/homepage');

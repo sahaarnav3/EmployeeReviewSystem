@@ -9,7 +9,7 @@ const fetchEmployees = (async () => {
     .catch(err => { return {'message': `Error Occured while fetching only employees list from mongo (This is client side) (err = ${err})` } });
 })();
 
-
+// This will show the edit menu to edit the details of the employee, when the button on employee is clicked.
 const showEditMenu = (id) => {
         document.querySelector('.edit-employee').innerHTML =
         `
@@ -31,6 +31,8 @@ const showEditMenu = (id) => {
         `
 }
 
+// This function will be used to render the assign review function after the employee is clicked.
+// The employee clicked will the one receiving the rating and from whom will be selected from the drop-down.
 const assignReviewSection = (id) => {
     let assignReview = document.querySelector('.assign-review select');
     assignReview.innerHTML = `<option selected disabled>Choose the Employee You Want To Assign Review From:</option>`;

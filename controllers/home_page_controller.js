@@ -1,16 +1,17 @@
 const Employee = require('../models/employees');
 const Rating = require('../models/ratings');
 
+// Below Controller will be used to render either the Admin or Employee page dashboard based on the role of logged in employee.
 module.exports.homepage = (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
-    // res.send(req.user.role);
+
     if (req.user.role === 'Admin')
         return res.redirect('/admin-page');
     return res.redirect('/employee-page');
-    //do one thing just check if employee is admin or not and redirect him accordingly. Don't use this function to render one page.
 }
 
+// Below Controller will be used to fetch all the employees present.
 module.exports.fetchEmployess = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -20,10 +21,10 @@ module.exports.fetchEmployess = async (req, res) => {
         if (emp.role === 'Employee')
             onlyEmployees.push(emp);
     });
-    // console.log("only Employees -- ",onlyEmployees);
     res.json(onlyEmployees);
 }
 
+// Below controller is used to render the admin page dashboard based on all the retrieved data.
 module.exports.adminPageRender = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -40,6 +41,7 @@ module.exports.adminPageRender = async (req, res) => {
     });
 }
 
+// Below controller to create a new employee(or Admin) when a post request is sent. This is from the admin page.
 module.exports.createEmployeeFromAdmin = async (req, res) => {
     let newEmployee = "";
     try {
@@ -57,7 +59,7 @@ module.exports.createEmployeeFromAdmin = async (req, res) => {
     return res.redirect('/homepage');
 }
 
-
+// Below controller will be used to open the employee page dashboard.
 module.exports.employeePageRender = (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -68,6 +70,7 @@ module.exports.employeePageRender = (req, res) => {
     });
 }
 
+// Below controller will be used for logging out employee on both employee & admin page.
 module.exports.destroySession = (req, res) => {
     req.logout((err) => {
         if (err) {
@@ -77,7 +80,7 @@ module.exports.destroySession = (req, res) => {
         res.redirect('/login-employee');
     })
 }
-
+// Below controller will be used to delete employee from DB. This is available on Admin page only.
 module.exports.deleteEmployee = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -90,6 +93,7 @@ module.exports.deleteEmployee = async (req, res) => {
     return res.redirect('/homepage');
 }
 
+// Below controller will be used to edit the detail of any employee except Admin.
 module.exports.editEmployee = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -116,6 +120,7 @@ module.exports.editEmployee = async (req, res) => {
     // res.json(req.body);
 }
 
+// Below controller will be used to assign review from an employee to another employee.
 module.exports.addReview = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -134,6 +139,7 @@ module.exports.addReview = async (req, res) => {
     return res.redirect('/homepage');
 }
 
+// Below controller will be used to fetch all the ratings that has been given to a particular employee and by whom.
 module.exports.fetchRatings = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -167,6 +173,7 @@ module.exports.fetchRatings = async (req, res) => {
     return res.json(finalRating);
 }
 
+// Below controller will be used to fetch all the ratings that needs to be submitted from a particular employee (with to whom the rating is submitted)
 module.exports.fetchPendingRatings = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
@@ -199,6 +206,7 @@ module.exports.fetchPendingRatings = async (req, res) => {
     return res.json(finalRating);
 }
 
+// Below controller will be used to change the status of a rating from pending to complete and also assign the text content to the review
 module.exports.modifyRating = async (req, res) => {
     if (!req.isAuthenticated())
         return res.redirect('/login-employee');
