@@ -67,8 +67,8 @@ const renderPendingRatings = (async() => {
         document.querySelector('.pending-review-list').innerHTML += 
         `
             <form action="/modify-rating" method="POST" class="pending-review">
-                <h2>${name}</h2>
-                <input type="text" name="rating-content" placeholder="Enter Your Views.." class="review-text-input" required>
+                <h2>To : ${name}</h2>
+                <input type="text" name="rating-content" placeholder="Enter Your Opinion.." class="review-text-input" required>
                 <input type="hidden" name="rating-id" value="${fetchedRatings[name]}">
                 <input type="submit" value="Submit Rating" class="review-text-btn">
             </form>

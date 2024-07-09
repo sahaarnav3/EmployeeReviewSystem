@@ -22,3 +22,9 @@ Now when you click on `Click to Edit !` button the detail section of employee ap
 
 ![Employee Details](./assets/Readme/image4.png)
 `Please Note the buttons are disabled for Admins. Any Admin can't modify any other Admin.`
+So in this new portion you can edit the details of the employee, assign review from and see all the reviews given to the employee.
+
+## Employee Pannel (Will appear when any non-admin employee logs in)
+![Employee Pannel](./assets/Readme/image5.png)
+
+So this is the Employee View Pannel, as you can see it is divided into 2 sections, navbar and review section. On left you have `Pending Review` section i.e. the reviews pending from logged in employee to the mentioned employee. And on right we have the review section of the employee i.e the reviews he has received from other employees.
