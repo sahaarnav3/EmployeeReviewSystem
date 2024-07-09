@@ -28,3 +28,6 @@ So in this new portion you can edit the details of the employee, assign review f
 ![Employee Pannel](./assets/Readme/image5.png)
 
 So this is the Employee View Pannel, as you can see it is divided into 2 sections, navbar and review section. On left you have `Pending Review` section i.e. the reviews pending from logged in employee to the mentioned employee. And on right we have the review section of the employee i.e the reviews he has received from other employees.
+
+
+# Thank You.
